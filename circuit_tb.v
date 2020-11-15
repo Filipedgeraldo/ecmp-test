@@ -7,7 +7,7 @@ module circuit_tb;
    `RESET(rst, 1, 10)
    `SIGNAL(en, 1)
    `SIGNAL(x, 32)
-   `SIGNAL_OUT(y, 32)
+   `SIGNAL_OUT(y, 100)
 
    integer i;
    
@@ -17,7 +17,8 @@ module circuit_tb;
       en=0;
       for (i=0; i<100; i=i+1) begin
          @(posedge clk) #1 x=i; en=1;
-         @(posedge clk) #1 en=0;
+         $display("%d: %d",i+1,y);
+	 //@(posedge clk) #1 en=0;
       end
 
       @(posedge clk) #100 $finish;
